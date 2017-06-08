@@ -1,0 +1,519 @@
+var imgLoadedRed;
+var imgLoadedGreen;
+var imgLoadedBlue;
+
+var red_array;//super big, lets me cache image lookup
+var green_array;//
+var blue_array; //
+
+var stable_rand_1;
+var stable_rand_2;
+
+function initColor(){
+	imgLoadedRed = false;
+	imgLoadedGreen = false;
+	imgLoadedBlue = false;
+	red_array = [];
+	green_array = [];
+	blue_array = [];
+	stable_rand_1 = Math.random()*100;
+	stable_rand_2 = Math.random()*100;
+}
+
+function getColorFunctions(){
+	return [test,waveCheckers,wavyRoundDiamond,wavyRoundDiamond2,randJag,randJag2,randVertWaves,randHorWaves,weirdBumps,roundedDiamonds,triangleFractal,quadx,quady,weirdTinyCircles,biggerCircles,sqrty,sqrtx,logy, logx, trippySwirls,nestedGradient,nonConstantLines,nonConstantLines2,nestedGradient2,checkerPattern,weirdCheckers,thinStripes2,thinStripes, randomImageRed,randomImageGreen,randomImageBlue,white, black, time,random255, centerRadialStripes, verticalGradiantStripes, horizontalGradiantStripes,verticalGradiant, horizontalGradiant, leftDiagonalGradiant, rightDiagonalGradiant,diagonalStripes,diagonalStripes2];
+}
+
+function loadRandom(con, can){
+	var rand=document.getElementById("random");
+	con.drawImage(rand,0,0,can.width, can.height);
+	//reget random image (so it's different next time);
+	reRandomizeImage();
+}
+
+function reRandomizeImage(){
+	var image=document.getElementById("random");
+	image.src="http://lorempixel.com/100/100/?v="+Date.now(); //keeps it from caching
+}
+
+
+
+function test(x,y){
+	return Math.floor((Math.sin(x/stable_rand_1)*255+ Math.acos(y/canvas.height)*1000)+ Math.sin(y/stable_rand_1)*255+ Math.acos(x/(stable_rand_2*canvas.width))*1000 )%255;
+}
+
+function wavyRoundDiamond2(x,y){
+	return Math.floor((Math.sin(x/stable_rand_1)*255+ Math.acos(y/canvas.height)*1000)+ Math.sin(y/stable_rand_1)*255+ Math.acos(x/(stable_rand_2*canvas.width))*1000 )%255;
+}
+
+function wavyRoundDiamond(x,y){
+	return Math.floor((Math.sin(x/stable_rand_1)*255+ Math.acos(y/canvas.height)*1000)+ Math.cos(x/stable_rand_1)*255+ Math.sin(y/stable_rand_2)*255 )%255;
+}
+
+function waveCheckers(x,y){
+	return Math.floor(x^2+y +Math.floor(Math.cos(x/stable_rand_1)*255+ Math.sin(y/stable_rand_2)*255))%255;
+}
+
+function randHorWaves(x,y){
+	return Math.floor(Math.sin(x/stable_rand_1)*255+ Math.acos(y/canvas.height)*1000)%255	
+}
+
+function randVertWaves(x,y){
+	return Math.floor(Math.sin(y/stable_rand_1)*255+ Math.acos(x/canvas.width)*1000)%255	
+}
+
+function randJag2(x,y){
+	return Math.floor(Math.sin(y/stable_rand_1)*255+ Math.acos(x/(stable_rand_2*canvas.width))*1000)%255
+}
+
+function randJag(x,y){
+	return Math.floor(Math.sin(x/stable_rand_1)*255+ Math.acos(y/(12*canvas.height))*1000)%255
+}
+
+function weirdBumps(x,y){
+	return Math.floor(Math.cos(x/stable_rand_1)*255+ Math.tan(y/stable_rand_2)*255)%255	
+}
+
+function roundedDiamonds(x,y){
+	return Math.floor(Math.cos(x/stable_rand_1)*255+ Math.sin(y/stable_rand_2)*255)%255
+}
+
+function triangleFractal(x,y){
+	return Math.floor(y^2+x^2+x+y)%255
+}
+
+function quadx(x,y){
+	return Math.floor(x^2 + 0.5*x)%255;
+}
+
+function quady(x,y){
+	return Math.floor(y^2 + 0.5*y)%255;
+}
+
+function biggerCircles(x,y){
+	return Math.floor(Math.pow(x,0.101)*255 * Math.pow(y,0.101)*255)%255;
+}
+
+function weirdTinyCircles(x,y){
+	return Math.floor(Math.log(y)*255*Math.log(x)*255)%255;
+}
+
+function sqrtx(x,y){
+	return Math.floor(Math.sqrt(x)*255)%255
+}
+
+function sqrty(x,y){
+	return Math.floor(Math.sqrt(y)*255)%255
+}
+
+function logy(x,y){
+	return Math.floor(Math.log(y)*255)%255
+}
+
+function logx(x,y){
+	return Math.floor(Math.log(x)*255)%255
+}
+
+function nonConstantLines2(x,y){
+	return Math.floor(Math.exp(y))%255
+}
+
+
+function nonConstantLines(x,y){
+	return Math.floor(Math.exp(x))%255
+}
+
+function trippySwirls(x,y){
+	return Math.floor(x*y)%255;
+}
+
+function weirdCheckers(x,y){
+	return Math.floor((x^5*y^5)%255);
+}
+
+function nestedGradient(x,y){
+	return Math.floor(Math.min(x,y)%255)
+}
+
+function nestedGradient2(x,y){
+	return Math.floor(Math.max(x,y)%255)
+}
+
+function thinStripes(x0,y0){
+	return Math.floor(Math.cos(x0)*(stable_rand_1*stable_rand_2))%255;
+}
+
+function thinStripes2(x0,y0){
+	return Math.floor(Math.sin(y0)*(stable_rand_1*stable_rand_2))%255;
+}
+
+function random255(){
+	return Math.floor(Math.random()* 255);
+}
+
+
+function createFill(red, green, blue){
+   return "fill:rgb(" + red + "," + green + "," + blue + ")";
+}
+
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function createHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+
+function createRGB(red, green, blue){
+   return "rgb(" + red + "," + green + "," + blue + ")";
+}
+
+
+
+
+
+function getColorWithFunctions(x,y,red_func, green_func, blue_func){
+	var red;
+	var green;
+	var blue;
+	if(red_func.constructor == Array){
+		red = pieceMeal(x,y,red_func)
+	}else{
+		red = red_func(x,y);
+	}
+	if(green_func.constructor == Array){
+		green = pieceMeal(x,y,green_func)
+	}else{
+		green = green_func(x,y);
+	}
+	if(blue_func.constructor == Array){
+		blue = pieceMeal(x,y,blue_func)
+	}else{
+		blue = blue_func(x,y);
+	}
+	return createHex(red, green, blue);
+}
+
+function getColorWithFunctionsRGB(x,y,red_func, green_func, blue_func){
+	var red;
+	var green;
+	var blue;
+	if(red_func.constructor == Array){
+		red = pieceMeal(x,y,red_func)
+	}else{
+		red = red_func(x,y);
+	}
+	if(green_func.constructor == Array){
+		green = pieceMeal(x,y,green_func)
+	}else{
+		green = green_func(x,y);
+	}
+	if(blue_func.constructor == Array){
+		blue = pieceMeal(x,y,blue_func)
+	}else{
+		blue = blue_func(x,y);
+	}
+	return [red, green, blue];
+}
+
+function twoBlack(red, green, blue){
+	if(red == 0 & green == 0){
+		return true;
+	}
+	if(red == 0 & blue == 0){
+		return true;
+	}
+	if(blue == 0 & green == 0){
+		return true;
+	}
+	return false;
+}
+
+function twoWhite(red,green,blue){
+	if(red == 255 & green == 255){
+		return true;
+	}
+	if(red == 255 & blue == 255){
+		return true;
+	}
+	if(blue == 255 & green == 255){
+		return true;
+	}
+	return false;
+}
+
+
+
+function getRGB(funcName, x, y){
+	var r = 0;
+	var g = 0;
+	var b = 0;
+	switch(funcName){
+		case "randomImage":
+			r = randomImageRed(x,y);
+			g = randomImageGreen(x,y);
+			b= randomImageBlue(x,y);
+		break;
+	}
+	return [r,g,b];
+}
+
+function randomPieceMealArray(size){
+   var allFunctions = getColorFunctions();
+   var ret = [];
+   for(var i = 0; i< size; i++){
+   		var index = Math.random() * allFunctions.length;
+   		ret.push(allFunctions[Math.floor(index)]);
+   }
+   return ret;
+}
+
+function white(){
+	return 255;
+}
+
+function black(){
+	return 0;
+}
+
+function distance(x,x1,y,y1){
+	return Math.sqrt(Math.pow((x-x1),2) + Math.pow((y-y1),2));
+}
+
+//gives you multiple elongated circles if you multiple x or y
+function centerRadialStripes(x,y){
+	var wc = canvas.width/2;
+    var hc = canvas.height/2;
+    return Math.floor(distance(x,wc,y,hc) % 255);
+}
+
+
+function diagonalStripes(x,y){
+	var color = x-y;
+	return Math.floor(Math.abs(255 - color))%255; //stripe of color down diagonal middle.
+}
+
+function diagonalStripes2(x,y){
+	var color = y-x;
+	return Math.floor(Math.abs(255 - color))%255; //stripe of color down diagonal middle.
+}
+
+
+function checkerPattern(x,y){
+	return Math.floor((x^2+y^2)%255);
+}
+
+//more stripes if you multiply x by something
+function verticalGradiantStripes(x,y){
+	return Math.floor(x%255);
+}
+
+function horizontalGradiantStripes(x,y){
+	return Math.floor(y%255);
+}
+
+function randomImageRed(x,y){
+	testLoadRed(loadRandom, red_context, red_canvas);
+	if(red_array.length == 0){
+		red_array = red_context.getImageData(0, 0, red_canvas.width, red_canvas.height).data;
+	}
+	return sampleScaledImage(x,y,red_array,0);
+}
+
+function randomImageGreen(x,y){
+	testLoadGreen(loadRandom, green_context, green_canvas);
+	if(green_array.length == 0){
+		green_array = green_context.getImageData(0, 0, green_canvas.width, green_canvas.height).data;
+	}
+
+	return sampleScaledImage(x,y,green_array,1);
+}
+
+function randomImageBlue(x,y){
+	testLoadBlue(loadRandom, blue_context, blue_canvas);
+	if(blue_array.length == 0){
+		blue_array = blue_context.getImageData(0, 0, blue_canvas.width, blue_canvas.height).data;
+	}
+	return sampleScaledImage(x,y,blue_array,2);
+}
+
+function sampleScaledImage(x,y, array,offset){
+	y = Math.floor(y)
+	x = Math.floor(x)
+	var i = (y * canvas.width + x)* 4; //array is in sets of rgba 
+	return array[i+offset];
+}
+
+
+
+function testLoadRed(func, con,can){
+	if(!imgLoadedRed){
+		func(con,can);
+		imgLoadedRed = true;
+	}
+}
+
+function testLoadGreen(func, con,can){
+	if(!imgLoadedGreen){
+		func(con,can);
+		imgLoadedGreen = true;
+	}
+}
+
+function testLoadBlue(func, con,can){
+	if(!imgLoadedBlue){
+		func(con,can);
+		imgLoadedBlue = true;
+	}
+}
+
+
+function verticalGradiant(x,y){
+	var w = canvas.width;
+	return Math.floor((x * 255)/w);
+}
+
+function time(x,y){
+	return Date.now()%255;
+}
+
+function horizontalGradiant(x,y){
+	var h = canvas.height;
+	return Math.floor((y * 255)/h);
+}
+
+//from bottom left to top right
+function leftDiagonalGradiant(x,y){
+	return Math.floor((x+y) % 255);
+}
+
+//from bottom right to top left
+function rightDiagonalGradiant(x,y){
+	return Math.floor(Math.abs(x-y) % 255);
+}
+
+//applies different functions to two halves of the image
+function topBottom(y,callbackTop,callbackBottom){
+	var hc = canvas.height/2;
+	if(y< hc){
+		return callbackTop;
+	}else{
+		return callbackBottom;
+	}  
+}
+
+function leftRight(x,callbackLeft,callbackRight){
+	var wc = canvas.width/2;
+	if(x> wc){
+		return callbackRight;
+	}else{
+		return callbackLeft;
+	} 
+}
+
+//divides the box into callback_array_length sections
+//applies each callback to it's coresponding section
+//extra sections are blank or zero
+function pieceMeal(x,y,callback_array){
+	var num_columns = Math.ceil(Math.pow(callback_array.length, 0.5));
+	var num_rows = Math.floor(Math.pow(callback_array.length, 0.5)); //for now assume square
+	//first thing I need to figure out is how big each section should be.
+	var cell_width = canvas.width/num_columns;  
+	var cell_height = canvas.height/num_rows;
+	//okay, now I need to figure out which section x and y would be in.
+	var x_calc = canvas.width/x
+	var ret =  coordToArrayElement(num_rows, num_columns, cell_width, cell_height, x,y,callback_array);
+	if(ret == 0){
+		return 0;
+	}else{
+		return ret(x,y);
+	}
+}
+
+
+
+//I need to turn an x,y coordinate into a location in an array.
+//from 2d to 1d.
+//if i assume each array takes up an equal amount of physical space,
+//then I know when the 'row' ends.
+function coordToArrayElement(num_rows, num_columns, cell_width, cell_height, x,y,array){
+	//first, how far down are we?
+	//the row I fall in ends after I end, and starts before I start.
+
+	var row = Math.ceil(y/cell_height) - 1;
+	var column = Math.ceil(x/cell_width) - 1;
+	//console.log("y is: " + y + " so I think I'm at row: " + row + " because cell_height is: " + cell_height);
+	//console.log("x is: " + x + " so I think I'm at column: " + column + " because cell_width is: " + cell_width);
+	//first element is zero, second is 1. if 3 columns, then fourth element will be 3, or 3 columns * 1st row + zero)
+	var ret = row*num_columns + column;
+	if(ret > array.length - 1 || ret < 0){
+		return 0;
+	}
+
+	return array[ret];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

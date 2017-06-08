@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<script type="text/javascript" src="javascripts/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="javascripts/Electricity/PlantWorld.js"></script>
+        <script type="text/javascript" src="javascripts/Electricity/PlantTile.js"></script>
+        <script type="text/javascript" src="javascripts/Electricity/Plant.js"></script>
+
+		<script type="text/javascript">
+            var plantWorld;
+            var block_height = 6;
+            var canvas;
+            var context;
+
+			window.onload = function(){
+                canvas = document.getElementById("canvas");
+                context=canvas.getContext("2d");
+                plantWorld = new PlantWorld(canvas, context, block_height);
+                plantWorld.render(plantWorld);
+                setInterval(plantWorld.render.bind(null, plantWorld), 10);
+                setInterval(plantWorld.tick.bind(null, plantWorld), 10);
+			}
+
+		</script>
+	</head>
+	<body>
+		
+		<br>
+		<canvas id="canvas" width="300" height="300">  </canvas>
+        <br>
+        <a href = "plant.html">Plant</a>  |  <a href = "color.html">Color</a>  |  <a href = "electricity.html">Electricity</a>
+		
+	</body>
+</html>

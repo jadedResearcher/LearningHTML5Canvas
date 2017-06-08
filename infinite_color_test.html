@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<script type="text/javascript" src="javascripts/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="javascripts/colorFunctions.js"></script>
+		<script type="text/javascript" src="javascripts/infinite_color_test.js"></script>
+		<script type="text/javascript">
+			
+			var refresh_speed = 1;
+			var canvas;
+			var context;
+			var red_canvas;
+			var red_context;
+			var green_canvas;
+			var green_context;
+			var blue_canvas;
+			var blue_context;
+			var main_group;
+			var stop = false;
+			var last_x = 0;
+			var last_y = 0;
+			window.onload = function(){
+				canvas = document.getElementById("canvas");
+				context=canvas.getContext("2d");
+				red_canvas = document.getElementById("red_canvas");
+				red_context=red_canvas.getContext("2d");
+				green_canvas = document.getElementById("green_canvas");
+				green_context=green_canvas.getContext("2d");
+				blue_canvas = document.getElementById("blue_canvas");
+				blue_context=blue_canvas.getContext("2d");
+				init();
+			}
+
+		</script>
+	</head>
+	<body>
+		
+		<br>
+		<canvas id="canvas" width="500" height="500">  </canvas>
+		<p>This document renders instantly, with each pixel calculated from color functions.</p>
+
+		<br>
+		<a href = "image_test.html">Position, shape and color are changed over time.</a> |
+		<a href = "infinite.html">Infinitely draws random colors and shapes in a set position.</a> | 
+		<a href = "ModernArtClicker.html">Modern Art Clicker</a> | 
+		<a href = "infinite_image_only.html">Infinite Image Version</a> |
+		
+		<canvas id="red_canvas" width="500" height="500" style="visibility:hidden"> </canvas>
+		<canvas id="green_canvas" width="500" height="500" style="visibility:hidden"> </canvas>
+		<canvas id="blue_canvas" width="500" height="500" style="visibility:hidden"> </canvas>
+		<img id ="earth" src = "Images/earth.jpg" height="100" style="visibility:hidden">
+		<img id ="cat" src = "Images/cat.jpeg" height="100" style="visibility:hidden">
+		<img crossorigin="anonymous" id ="random" src = "http://lorempixel.com/100/100/" height="100" >
+		
+	</body>
+</html>

@@ -1,0 +1,16 @@
+Modern Art Clicker:  simple clicker game.
+
+Get rid of set time out.
+
+Each time you click, you put a new rect down. 
+
+Each rect you put down is one Currency (cookie clicker style, no multiplier).
+
+After a minute or so of clicking, you can buy an intern, to click for you.  (set timeout starts at base rate).
+
+Cost of additional interns goes up exponentially.  Each new intern reduces the amount of time set timeout has to wait.
+
+If set timeout is 0, then instead start giving multiple currency per rect.
+
+
+simple.

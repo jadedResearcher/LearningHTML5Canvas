@@ -1,0 +1,109 @@
+SVG_NS = "http://www.w3.org/2000/svg"
+
+ function missionJenny(t1, t2){
+	var origin_x = canvas.width.baseVal.value/2;
+	var  origin_y = canvas.height.baseVal.value/2;
+    var rect = createRect();
+
+    var anim_pos = createPositionAnimation();
+    var anim_col = createColorAnimation();
+
+    var nSteps = t2-t1
+    var pos_values = ""
+    var col_values = "";
+    var keytimes = ""
+
+    for (var t=t1; t<=t2; t++) {
+        var theta = 10*Math.log(t)
+        theta = Math.sqrt(t) *3.5
+        var r = theta*12/(2*Math.PI)
+        //console.log([theta, r, x,y])
+        var x = r* Math.cos(theta) + origin_x;
+        var y = r* Math.sin(theta) + origin_y;
+        //console.log([theta, r, x,y])
+        pos_values +=" ; "+x+" "+y
+        var r = checkerPattern(x,y);
+        var g = verticalGradiant(x,y);
+        var b = leftDiagonalGradiant(x,y);
+        col_values +=" ; "+createRGB(r, g, b);
+        keytimes = keytimes + " ; "+((t-t1)/nSteps);
+    }
+    pos_values = pos_values.substring(3)
+    col_values = col_values.substring(3)
+    keytimes = keytimes.substring(3)
+    //console.log(values)
+    //console.log(keytimes)
+
+    anim_pos.setAttribute("values", pos_values)
+    anim_pos.setAttribute("keyTimes", keytimes)
+    anim_col.setAttribute("values", col_values)
+    anim_col.setAttribute("keyTimes", keytimes)
+    rect.appendChild(anim_pos);
+    rect.appendChild(anim_col);
+}
+
+function createPositionAnimation(){
+	var anim = document.createElementNS(SVG_NS, "animateTransform")
+    anim.setAttribute("attributeName", "transform")
+    anim.setAttribute("attributeType", "XML")
+    anim.setAttribute("type", "translate")
+    anim.setAttribute("begin", wallclockToDocumentTime(Date.now()))
+    anim.setAttribute("dur", "100s")
+    return anim;
+}
+
+function createColorAnimation(){
+	var anim = document.createElementNS(SVG_NS, "animate")
+    anim.setAttribute("attributeName", "fill")
+    anim.setAttribute("attributeType", "XML")
+    anim.setAttribute("type", "fill")
+    anim.setAttribute("calcMode", "discrete");
+    anim.setAttribute("begin", wallclockToDocumentTime(Date.now()))
+    anim.setAttribute("dur", "100s")
+    return anim;
+}
+
+function wallclockToDocumentTime(t1)
+{
+   return (t1 - load_time)/1000 + "s"; //s added so it fits directly into svg
+}
+
+function createRect(){
+	var canvas = document.getElementById("canvas")
+	var elt = document.createElementNS(SVG_NS, "rect")
+    canvas.appendChild(elt)
+    elt.setAttribute("x", 0)
+    elt.setAttribute("y", 0)
+    elt.setAttribute("width", 10)
+    elt.setAttribute("height", 10)
+    return elt;
+}
+
+function removeAllChildren(elt){
+    while (elt.childNodes.length>0) {
+		elt.removeChild(elt.firstChild)
+    }
+}
+
+function newRect(){
+	var t = Math.floor(Math.random()*500);
+	missionJenny(t, t+200);
+	//clean up old animations
+	if(canvas.childNodes.length > 300){
+		canvas.removeChild(canvas.firstChild);
+	}
+	tick();
+}
+
+function tick(){
+	var refresh_speed = Math.floor(Math.random() * 50+50);
+    setTimeout(newRect, refresh_speed);
+}
+
+function init()
+{
+    for (var i=10; i<100; i+=12) {
+        missionJenny(i, i+200)
+    }
+    tick();
+}

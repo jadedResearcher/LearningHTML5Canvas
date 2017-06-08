@@ -1,0 +1,55 @@
+SVG_NS = "http://www.w3.org/2000/svg"
+var canvas;
+ function mission2(t1, t2)
+{
+    var canvas = document.getElementById("canvas")
+
+    var elt = document.createElementNS(SVG_NS, "rect")
+    canvas.appendChild(elt)
+    elt.setAttribute("x", 0)
+    elt.setAttribute("y", 0)
+    elt.setAttribute("width", 10)
+    elt.setAttribute("height", 10)
+
+    var anim = document.createElementNS(SVG_NS, "animateTransform")
+    anim.setAttribute("attributeName", "transform")
+    anim.setAttribute("attributeType", "XML")
+    anim.setAttribute("type", "translate")
+    //anim.setAttribute("begin", "0s")
+    anim.setAttribute("dur", "100s")
+
+    var nSteps = t2-t1
+    var values = ""
+    var keytimes = ""
+
+    for (var t=t1; t<=t2; t++) {
+        var theta = 10*Math.log(t)
+        theta = Math.sqrt(t) *3.5
+        var r = theta*12/(2*Math.PI)
+        //console.log([theta, r, x,y])
+        var x = r* Math.cos(theta)
+        var y = r* Math.sin(theta)
+        //console.log([theta, r, x,y])
+        values = values +" ; "+x+" "+y
+        keytimes = keytimes + " ; "+((t-t1)/nSteps)
+    }
+    values = values.substring(3)
+    keytimes = keytimes.substring(3)
+    //console.log(values)
+    //console.log(keytimes)
+
+    anim.setAttribute("values", values)
+    anim.setAttribute("keyTimes", keytimes)
+    elt.appendChild(anim)
+}
+
+ 
+
+
+
+function mission3()
+{
+    for (var i=10; i<1000; i+=12) {
+        mission2(i, i+200)
+    }
+}

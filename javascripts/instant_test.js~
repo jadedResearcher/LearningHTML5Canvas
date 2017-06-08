@@ -1,0 +1,106 @@
+SVG_NS = "http://www.w3.org/2000/svg"
+var size = 3;
+var red_func;
+var green_func;
+var blue_func;
+
+var child_count = 0;
+var timeOut;
+
+
+function init(){
+	initColor();
+	syncFormValues();
+	stop = false;
+	last_x = 0;
+	last_y = 0;
+	child_count = 0;
+	drawCanvas();
+}
+
+
+function removeAllChildren(elt){
+    while (elt.childNodes.length>0) {
+		elt.removeChild(elt.firstChild)
+    }
+}
+
+function syncFormValues(){
+	size = parseInt($("#size").val());
+	red_func = $("#red_func").val();
+	green_func = $("#green_func").val();
+	blue_func = $("#blue_func").val();
+}
+
+
+function createRedDropDown(){
+	var obj = $("#red_func");
+	var html = "<select id ='#red_func'>";
+	var funcs = getColorFunctions();
+	for(var i = 0; i<funcs.length; i++){
+		html += "<option>" + funcs[i].name+ " </option>";
+	}
+	html += "</select>";
+	obj.html(html);
+}
+
+function createGreenDropDown(){
+	var obj = $("#green_func");
+	var html = "<select id ='#green_func'>";
+	var funcs = getColorFunctions();
+	for(var i = 0; i<funcs.length; i++){
+		html += "<option>" + funcs[i].name+ " </option>";
+	}
+	html += "</select>";
+	obj.html(html);
+}
+
+function createBlueDropDown(){
+	var obj = $("#blue_func");
+	var html = "<select id ='#blue_func'>";
+	var funcs = getColorFunctions();
+	for(var i = 0; i<funcs.length; i++){
+		html += "<option>" + funcs[i].name+ " </option>";
+	}
+	html += "</select>";
+	obj.html(html);
+}
+
+function removeAllChildren(){
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	child_count = 0;
+}
+
+
+
+//draw red, green and blue canvas immediately.
+function drawCanvas(){
+	//for each pixel, var color = getColorWithFunctions(x,y,window[red_func], window[green_func], window[blue_func]);
+	var imageData = context.getImageData(0, 0,canvas.width, canvas.height);
+    var data = imageData.data;
+    var x = 0;
+    var y = 0;
+	for(var i = 0; i < 10000; i += 4) {
+		  //console.log([x,y]);
+		  var color = getColorWithFunctionsRGB(x,y,window[red_func], window[green_func], window[blue_func]);
+          // red
+          data[i] = color[0];
+          // green
+          data[i + 1] = color[1];
+          // blue
+          data[i + 2] =color[2];
+         x += 1;
+        if(x>canvas.width){
+        	x = 0;
+        	y += 1;
+        }
+        }
+
+        // overwrite original image
+        context.putImageData(imageData, x, y);
+}
+
+
+
+
+
