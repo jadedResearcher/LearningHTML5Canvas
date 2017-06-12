@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<script type="text/javascript" src="javascripts/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="javascripts/HomestuckColor/PlantWorld.js"></script>
+        <script type="text/javascript" src="javascripts/HomestuckColor/PlantTile.js"></script>
+        <script type="text/javascript" src="javascripts/HomestuckColor/Plant.js"></script>
+
+		<script type="text/javascript">
+            var plantWorld;
+            var block_height = 6;
+            var canvas;
+            var context;
+
+			window.onload = function(){
+                canvas = document.getElementById("canvas");
+                context=canvas.getContext("2d");
+                var tmp_canvas = document.createElement('canvas');
+	            tmp_canvas.width = 400;
+	            tmp_canvas.height = 400;
+	            var tmp_context = tmp_canvas.getContext("2d");
+                plantWorld = new PlantWorld(canvas, context, block_height, tmp_canvas, tmp_context);
+                plantWorld.render(plantWorld);
+                setInterval(plantWorld.render.bind(null, plantWorld), 100);
+                setInterval(plantWorld.tick.bind(null, plantWorld), 100);
+			}
+
+		</script>
+	</head>
+	<body>
+
+		<br>
+		<canvas id="canvas" width="400" height="400">  </canvas>
+        <br>
+				<p style='width:400px'>Colors are chosen based on Homestuck's Hemospectrum. Lower bloods are more numerous, but have shorter lives. Higher bloods are rarer and live longer. Lower bloods start out having all the screen real estate, but if you run it long enough, you can see the way high bloods start consuming all the resources just by virtue of longevity.
+					<Br><br>
+						Who knew a shitty screen saver could get so fake political???<p>
+        <a href = "plant.html">Plant</a>  |  <a href = "color.html">Color</a>  | |  <a href = "homestuck_color.html">Hemospectrum</a>  |  <a href = "electricity.html">Electricity</a>
+
+
+	</body>
+</html>

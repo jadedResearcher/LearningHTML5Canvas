@@ -72,7 +72,8 @@ function emptySquare(x,y,color){
 function getRandomText(x,y,color){
 	var url = "http://randomword.setgetgo.com/get.php";
 	var jqxhr = $.get(url, function(data) {
-		text = data.trim();
+		//text = data.trim();
+		text = "honk"
 		if(color){
 			finishText(x,y,color);
 		}
