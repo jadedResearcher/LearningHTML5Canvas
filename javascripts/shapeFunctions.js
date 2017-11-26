@@ -76,6 +76,7 @@ function getRandomText(x,y,color){
     }
     text = possibilities[Math.floor(Math.random()*possibilities.length)];
     return text;
+
 }
 
 function textShape(x,y,color){

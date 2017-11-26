@@ -20,15 +20,16 @@ function initColor(){
 	stable_rand_2 = Math.random()*100;
 }
 
+//6/6/17 removed random image stuff 'cause not working
 function getColorFunctions(){
-	return [test,waveCheckers,wavyRoundDiamond,wavyRoundDiamond2,randJag,randJag2,randVertWaves,randHorWaves,weirdBumps,roundedDiamonds,triangleFractal,quadx,quady,weirdTinyCircles,biggerCircles,sqrty,sqrtx,logy, logx, trippySwirls,nestedGradient,nonConstantLines,nonConstantLines2,nestedGradient2,checkerPattern,weirdCheckers,thinStripes2,thinStripes, randomImageRed,randomImageGreen,randomImageBlue,white, black, time,random255, centerRadialStripes, verticalGradiantStripes, horizontalGradiantStripes,verticalGradiant, horizontalGradiant, leftDiagonalGradiant, rightDiagonalGradiant,diagonalStripes,diagonalStripes2];
+	return [test,waveCheckers,wavyRoundDiamond,wavyRoundDiamond2,randJag,randJag2,randVertWaves,randHorWaves,weirdBumps,roundedDiamonds,triangleFractal,quadx,quady,weirdTinyCircles,biggerCircles,sqrty,sqrtx,logy, logx, trippySwirls,nestedGradient,nonConstantLines,nonConstantLines2,nestedGradient2,checkerPattern,weirdCheckers,thinStripes2,thinStripes,white, black, time,random255, centerRadialStripes, verticalGradiantStripes, horizontalGradiantStripes,verticalGradiant, horizontalGradiant, leftDiagonalGradiant, rightDiagonalGradiant,diagonalStripes,diagonalStripes2];
 }
 
 function loadRandom(con, can){
 	var rand=document.getElementById("random");
 	con.drawImage(rand,0,0,can.width, can.height);
 	//reget random image (so it's different next time);
-	reRandomizeImage();
+	//reRandomizeImage();
 }
 
 function reRandomizeImage(){
