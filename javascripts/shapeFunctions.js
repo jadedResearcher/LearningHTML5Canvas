@@ -70,7 +70,7 @@ function emptySquare(x,y,color){
 }
 
 function getRandomText(x,y,color){
-    var possibilities = ["KR","Get Well Soon!","Feel Better!","KR is a best.", "KR is a cool.", "KR c3< JR","Plz dont ban me.","You gave me my rank and began my rise to Power you buff badass motherfucker.","Your hammer strikes fear and love into everyone's heart!","You bring joy in one hand and memes in the other!","KR is amazing! "]
+    var possibilities = ["You are a legend incarnate.","You inspire me.","Keep fighting.","We're cheering for you!","KR rocks!","Thank you,KR!","KR, feel better!","KR","Get Well Soon!","Feel Better!","KR is the best.", "KR is a cool.", "KR c3< JR","Plz dont ban me.","You gave me my rank and began my rise to Power you buff badass motherfucker.","Your hammer strikes fear and love into everyone's heart!","You bring joy in one hand and memes in the other!","KR is amazing! "]
     if(!krMode){
         return "bluh";
     }

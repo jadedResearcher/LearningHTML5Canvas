@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Modern Art Clicker </title>
+		<title>Get Well Soon KR, from all of us at SBURBSim Discord </title>
 		<script type="text/javascript" src="javascripts/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="javascripts/colorFunctions.js"></script>
         <script type="text/javascript" src="javascripts/shapeFunctions.js"></script>
@@ -25,6 +25,7 @@
 			window.onload = function(){
 				canvas = document.getElementById("canvas");
 				context=canvas.getContext("2d");
+				context.textAlign = "center"
 				red_canvas = document.getElementById("red_canvas");
 				red_context=red_canvas.getContext("2d");
 				green_canvas = document.getElementById("green_canvas");
@@ -54,7 +55,7 @@
 			}
 			
 			function updateTimeBetweenClicks(){
-				var html ="(" + calculateTimeout() + ' ms between intern clicks.)';
+				var html ="(" + calculateTimeout() + ' ms between Observer clicks.)';
 				$("#time_between_clicks").html(html);
 			}
 			
@@ -100,8 +101,8 @@
 	</head>
 	<body>
 		<table><tr><td><canvas id="canvas" width="1000" height="1000">  </canvas></td>
-		<td><div id = "instructions">Click to paint your masterpiece.</div><br><br><br>
-		<div id = "reputation">0 Reputation Obtained.</div><br><br>
+		<td><div id = "instructions">Click to create your "Get Well Soon Card".</div><br><br><br>
+		<div id = "reputation">0 Well Wishes Obtained.</div><br><br>
 		<div id = "interns"> 0 Interns are working tirelessly for your glory.</div>  <br><div id="time_between_clicks"> </div> <br><br>
 		<div id = "hire_intern"> <button onclick="hireIntern()"> Hire Intern (5 Reputation) </button></div>
 		

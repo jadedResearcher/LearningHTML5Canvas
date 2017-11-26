@@ -13,7 +13,7 @@ var lastInitTime;
 var krMode = true;
 var multiplier = 1;
 var reputation = 130000;
-var num_interns = 10;
+var num_interns = 14;
 var last_rep = 0;
 var shape_func = textShape;
 var total_clicks = 0;
@@ -70,11 +70,11 @@ function updateDisplays(){
 }
 
 function displayReputation(){
-	$("#reputation").html(reputation + " Reputation Obtained.");
+	$("#reputation").html(reputation + " Well Wishes Obtained.");
 }
 
 function displayInterns(){
-	$("#interns").html(num_interns + " Interns are working tirelessly for your glory.");
+	$("#interns").html(num_interns + " SBURBSim Observers are working tirelessly for your glory.");
 }
 
 function evaluateReset(){
