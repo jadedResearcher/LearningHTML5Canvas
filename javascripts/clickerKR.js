@@ -12,8 +12,8 @@ var timeOut;
 var lastInitTime;
 var krMode = true;
 var multiplier = 1;
-var reputation = 0;
-var num_interns = 0;
+var reputation = 130000;
+var num_interns = 10;
 var last_rep = 0;
 var shape_func = textShape;
 var total_clicks = 0;
@@ -32,6 +32,7 @@ function init(){
 	green_func = randomPieceMealArray(num_g);
 	blue_func = randomPieceMealArray(num_b);
 	pos_func = randomPosFunction();
+	hireIntern();
 }
 
 function removeAllChildren(){
