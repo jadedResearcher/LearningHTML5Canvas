@@ -2,8 +2,6 @@ SVG_NS = "http://www.w3.org/2000/svg"
 var size = 3;
 var num_r = 1;
 var num_g = 1;
-var krMode = false;
-
 var num_b = 1;
 var red_func;
 var green_func;
@@ -12,11 +10,12 @@ var pos_func;
 var child_count = 0;
 var timeOut;
 var lastInitTime;
+var krMode = true;
 var multiplier = 1;
 var reputation = 0;
 var num_interns = 0;
 var last_rep = 0;
-var shape_func = square;
+var shape_func = textShape;
 var total_clicks = 0;
 function init(){
 	initPosition();
@@ -145,7 +144,7 @@ function addNewSquareAt(x,y,color){
 function chooseShapeBasedOnRep(x,y,color){
 	if(total_clicks % 1000 == 0 ){
         last_rep = reputation;
-        shape_func = randomShape();
+        shape_func = textShape;
 	}
 }
 

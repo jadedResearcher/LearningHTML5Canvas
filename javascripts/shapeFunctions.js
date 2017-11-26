@@ -70,21 +70,17 @@ function emptySquare(x,y,color){
 }
 
 function getRandomText(x,y,color){
-	var url = "http://randomword.setgetgo.com/get.php";
-	var jqxhr = $.get(url, function(data) {
-		text = data.trim();
-		if(color){
-			finishText(x,y,color);
-		}
-	});
+    var possibilities = ["KR","Get Well Soon!","Feel Better!","KR is a best.", "KR is a cool.", "KR c3< JR","Plz dont ban me.","You gave me my rank and began my rise to Power you buff badass motherfucker.","Your hammer strikes fear and love into everyone's heart!","You bring joy in one hand and memes in the other!","KR is amazing! "]
+    if(!krMode){
+        return "bluh";
+    }
+    text = possibilities[Math.floor(Math.random()*possibilities.length)];
+    return text;
 }
 
 function textShape(x,y,color){
-	if(text == "" || (Math.random() * 100 < 0.08)){
-    	var text = getRandomText(); //finishText iwll be called async
-    }else{
+    	text = getRandomText(); //finishText iwll be called async
     	finishText(x,y,color);
-    }
 }
 
 function finishText(x,y,color){
